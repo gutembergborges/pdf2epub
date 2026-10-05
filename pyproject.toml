@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf2epub"
+version = "0.1.0"
+description = "Rebuild a text-based PDF book as a clean, reflowable EPUB (headings, sidebars, tables, code, figures)."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pdfplumber>=0.10",
+    "pypdf>=4.0",
+    "pypdfium2>=4.0",
+    "Pillow>=10.0",
+    "numpy>=1.24",
+]
