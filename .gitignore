@@ -1,0 +1,8 @@
+*.pdf
+*.epub
+out/
+__pycache__/
+.venv/
+profiles/*.local.toml
+
+.DS_Store

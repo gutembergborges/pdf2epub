@@ -1,0 +1,51 @@
+# Example profile with invented values. Copy it, rename it, edit it.
+# Use it with:  python pdf2epub.py book.pdf -p profiles/my-book.toml
+# Every key is optional; a missing key falls back to the neutral default.
+
+title = "The Harbour Almanac"            # default: PDF metadata title, else the file name
+subtitle = "Tides, moorings and weather for small boats."   # default: none
+author = "Ana Fernsby"                    # default: PDF metadata author, else "Unknown"
+lang = "en"                               # dc:language and xml:lang
+out_name = "Harbour-Almanac.epub"         # default: <pdf file name>.epub
+
+cover_page = 1                            # page rendered as the cover image
+skip_pages = [2]                          # pages left out, e.g. the PDF's own contents page
+
+footer_y = 40                             # text whose baseline is below this is a running footer
+footer_res = [                            # regexes: footer text to drop (checked below y = 80)
+  '^(Part \d · \w+|Quick reference|Harbour Almanac)$',
+  '^\d{1,4}$',
+]
+
+divider_size = 90                         # a page whose biggest text is this size is a divider page
+stage_title = "Part {n} — {title}"       # chapter title built from a divider page
+eyebrow_re = '^(UNIT \d+|PART \d · .+|APPENDIX)$'   # small label above a chapter title
+opener_as_section = ["APPENDIX"]          # eyebrow values whose opener stays in the previous chapter
+
+h3_labels = ["before you sail", "step by step", "common mistakes"]   # upper-case labels that become h3 (lower-case prefixes)
+h19_as_h3 = ["Reading the sky", "Know your limits"]                   # big headings that are really sub-sections
+aside_labels = ["TIP", "CASE STUDY"]      # upper-case prefixes that open a box running to page end
+acronyms = ["VHF", "GPS", "AIS"]          # kept upper-case when a label is re-cased
+
+column_pages = [31]                       # pages laid out as two text columns
+diagram_figures = [1, 2]                  # figure numbers exported as PNG
+dialog_figures = [3]                      # figure numbers rebuilt as text (speaker, time, message)
+heading_fonts = ["Condensed_wght", "Headline"]   # font-name fragments that mark the heading font
+
+code_max_size = 9.0                       # monospace text at or below this size is a code block
+mono_split_em = 5.5                       # gap (in em) that splits two monospace columns on one line
+space_em = 0.18                           # gap (in em) that means "a space is missing"
+
+# Expected table of contents, used by the self-check: [chapter, [sub-entries]]
+expected_nav = [
+  ["Welcome aboard", ["How to use this book", "Reading the tide table"]],
+  ["Quick reference", []],
+  ["Part 1 — Harbour", ["Choosing a mooring"]],
+  ["Part 2 — Open water", ["Weather windows", "Night passages"]],
+  ["Appendix", ["Glossary"]],
+]
+front_nav = ["Cover", "Title page", "Contents"]   # front-matter entries in the contents
+
+# Extra alt text per figure number (keys are figure numbers, written as strings)
+[figure_alt_extra]
+"2" = "Flow chart: check forecast, then check tide, then choose to sail or wait."
