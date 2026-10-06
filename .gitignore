@@ -1,7 +1,3 @@
-*.pdf
-*.epub
-tmp/
-out/
 __pycache__/
 .venv/
 profiles/*.local.toml
@@ -18,3 +14,8 @@ input/*
 output/*
 !input/sample.pdf
 !output/sample.epub
+
+tmp/
+out/
+*.pdf
+*.epub
