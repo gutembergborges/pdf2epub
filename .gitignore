@@ -1,6 +1,7 @@
 *.pdf
 *.epub
 out/
+tmp/
 __pycache__/
 .venv/
 profiles/*.local.toml
