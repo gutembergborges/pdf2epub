@@ -1,17 +1,25 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pdf2epub"
 version = "0.1.0"
-description = "Rebuild a text-based PDF book as a clean, reflowable EPUB (headings, sidebars, tables, code, figures)."
+description = "Turn a design-heavy PDF into a Kindle-friendly EPUB 3, using a TOML profile for the book-specific rules."
 readme = "README.md"
-requires-python = ">=3.9"
-dependencies = [
-    "pdfplumber>=0.10",
-    "pypdf>=4.0",
-    "pypdfium2>=4.0",
-    "Pillow>=10.0",
-    "numpy>=1.24",
+requires-python = ">=3.11"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
 ]
+dependencies = ["pdfminer.six"]
+
+[project.optional-dependencies]
+dev = ["reportlab"]
+
+[project.scripts]
+pdf2epub = "pdf2epub.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,8 +1,21 @@
-*.pdf
-*.epub
-out/
 __pycache__/
 .venv/
 profiles/*.local.toml
 
 .DS_Store
+
+# Python packaging
+*.egg-info/
+build/
+dist/
+
+# input/ and output/ are workspace folders: only the two synthetic demo files are tracked
+input/*
+output/*
+!input/sample.pdf
+!output/sample.epub
+
+tmp/
+out/
+*.pdf
+*.epub
