@@ -6,20 +6,26 @@ No real books are included. The only tracked files in `input/` and `output/` are
 
 ## Requirements
 
-- Python 3.11 or newer
+- **Python 3.11** or newer
 - [pdfminer.six](https://pypi.org/project/pdfminer.six/) (installed by pip)
-- poppler's `pdftoppm`, a system tool and not a pip package, used for the cover and figure images:
+- **poppler's `pdftoppm`**: a system tool and not a pip package, used for the cover and figure images:
   - macOS: `brew install poppler`
   - Debian/Ubuntu: `sudo apt install poppler-utils`
   - Windows: install the poppler binaries and put their `bin` folder on the `PATH`
 
 ## Install
 
-```
+```bash
 pip install -e .
 ```
 
+### Development
 Add `[dev]` (`pip install -e ".[dev]"`) to also install reportlab, which the tests and the demo files use. Without installing, `pip install -r requirements.txt` gets the one runtime dependency and `python -m pdf2epub` works with `PYTHONPATH=src`.
+
+```bash
+pip install -e ".[dev]"
+pytest
+```
 
 ## Workflow
 
@@ -31,13 +37,13 @@ Add `[dev]` (`pip install -e ".[dev]"`) to also install reportlab, which the tes
 
 ## Try it
 
-```
+```bash
 pdf2epub input/sample.pdf -p profiles/example.toml -o output/
 ```
 
 This reads the synthetic demo PDF with the example profile and writes `output/Harbour-Almanac.epub` (the `out_name` in the example profile), then prints the checks. All of them should say PASS. The committed `output/sample.epub` is the same conversion saved under another name. When the converter's output changes, regenerate it:
 
-```
+```bash
 pdf2epub input/sample.pdf -p profiles/example.toml -o output/
 mv output/Harbour-Almanac.epub output/sample.epub
 ```
@@ -50,8 +56,8 @@ Copy `profiles/example.toml`, rename it and edit it. Every key is optional and t
 
 ## Tests
 
-```
-python -m unittest discover -s tests -v
+```bash
+python3 -m unittest discover -s tests -v
 ```
 
 The tests use only `unittest` and temporary directories; they never write into `input/` or `output/`. They are skipped, with a message, when reportlab or `pdftoppm` is missing.
