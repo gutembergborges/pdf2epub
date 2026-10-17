@@ -20,6 +20,7 @@ dev = ["reportlab"]
 
 [project.scripts]
 pdf2epub = "pdf2epub.cli:main"
+pdf2epub-profile = "pdf2epub.profile_gen:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
