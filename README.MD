@@ -54,6 +54,28 @@ mv output/Harbour-Almanac.epub output/sample.epub
 
 Copy `profiles/example.toml`, rename it and edit it. Every key is optional and the comments in that file explain each one. Keys that are not in the list are rejected with an error. A profile for a real book that you do not want to publish can be named `profiles/<name>.local.toml`: git ignores `profiles/*.local.toml`.
 
+### Draft a profile automatically
+
+`pdf2epub-profile` reads the PDF and writes a first draft, so you start from measured values instead of a blank file:
+
+```bash
+pdf2epub-profile input/book.pdf                       # -> profiles/book.local.toml (ignored by git)
+pdf2epub-profile input/book.pdf -o draft.toml --force # custom path, overwrite if it exists
+pdf2epub input/book.pdf -p profiles/book.local.toml -o output/
+```
+
+What it measures from text statistics:
+
+| Key | How |
+|---|---|
+| `footer_y`, `footer_res` | lines that repeat in the bottom 12% of at least 30% of pages; numbers become `\d{1,4}` |
+| `divider_size` | sparse pages (≤ 8 segments, page 1 excluded) whose biggest text is ≥ 3× body size; needs 2+ pages |
+| `column_pages` | pages where both halves hold ≥ 30% of the text segments |
+| `code_max_size` | largest monospace size at or below body size |
+| `skip_pages` | an early page titled "Contents" |
+
+It also lists heading-size candidates as comments. Judgement calls (`heading_fonts`, `eyebrow_re`, `h3_labels`, figures, `expected_nav`) stay manual. The draft is a starting point: review it, convert, look at the EPUB, adjust.
+
 ## Tests
 
 ```bash
