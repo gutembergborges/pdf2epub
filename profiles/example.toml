@@ -1,5 +1,5 @@
 # Example profile with invented values. Copy it, rename it, edit it.
-# Use it with:  python pdf2epub.py book.pdf -p profiles/my-book.toml
+# Use it with:  python src/pdf2epub/pdf2epub.py book.pdf -p profiles/my-book.toml
 # Every key is optional; a missing key falls back to the neutral default.
 
 title = "The Harbour Almanac"            # default: PDF metadata title, else the file name
